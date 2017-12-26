@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2></h2>
+	<div class="box"></div>
+	<div id="divs" class="divs">
+		<p></p>
+		<p></p>
+
+	</div>
+	<div class="di"></div>
+	<p class="di"></p>
+	<div>
+		<p></p>
+		<a href="">
+		life
+			<span></span>
+		</a>
+		<p></p>
+		<a href=""></a>
+		<a href=" http://example.com/#foo" id="#foo">lifes</a>
+	</div>
+	<span class="dii"></span>
+	<textarea name="" id="" cols="30" rows="10"></textarea>
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<ul>
+		<li id="lis"></li>
+	</ul>
+	<div style="display:none;"></div>
+	<input type="text">
+	<input type="hidden">
+	<input class="pass" type="password">
+	<input class="radio" type="radio">
+	<input class="check" type="checkbox" checked="checked">
+	<input class="submit" type="submit">
+	<input class="image" type="image">
+	<input class="reset" type="reset">
+	<input class="button "type="button">
+	<input class="file "type="file" disabled="disabled">
+	<select>
+		<option value="1">1</option>
+		<option value="2" selected = "selected">2</option>
+		<option value="3">3</option>
+	</select>
+</body>
+</html>
+<script>
+	// 获取页面中所有的元素
+	console.log($('*'));
+	// 获取页面中id
+	console.log($('#divs'));
+	// 获取页面中标签名
+	console.log($('div')) ;
+	// 获取页面中的类名
+	console.log($('.di')) ;
+	// 获取页面中的群组选择器,如果怕类名重复,也可以写标签名.类名
+	console.log($('p.di,span.dii'))
+	// 后代选择器
+	console.log($('div span'))
+	// 子类选择器，只能选择直系子元素
+	console.log($('div > span'))
+	// 选中相邻的兄弟元素,不能连选
+	console.log($('.di + div'))
+	// 选中所有的类名为div的兄弟元素
+	console.log($('div ~ div'))
+	// 选中第一个元素
+	console.log($('div :first'))
+	// 选中最后一个元素
+	console.log($('div :last'))
+	// 选中第n个元素,从0开始，中间有空格就是当前元素下面的第n个元素，没空格就是兄弟元素的第n个
+	console.log($('div :eq(0)')) // <p>  </p>
+	console.log($('div:eq(0)'))  // <div class="box">  </div>
+	// 选中未被选中的兄弟元素
+	console.log($('div:not(.di)'))
+	// 获取奇数行,索引值为偶数
+	console.log($('li:even').css({background:'red'}))
+	// 获取偶数行，索引值为奇数
+	console.log($('li:odd').css({background:'green'}))
+	// 获取大于索引值的元素，从0开始
+	console.log($('li:gt(3)'))
+	// 获取小于索引值的元素，从0开始
+	console.log($('li:lt(3)'))
+	// 返回语言为en的元素，english
+	console.log($('li:lang(en)'))
+	// 给页面标题加背景色，匹配h1 -- h6
+	console.log($(':header').css({width:200,background:'red',height:50}));
+	// 给页面元素添加animate动画
+		$('li').animate({height: '+=20'},500)
+	// 对不在执行动画效果的元素执行一个动画
+	$('h2').click(function(){
+		console.log(1)
+		$('h2:not(:animated)').animate({height: '+=20'},500)
+	})
+	// 表单元素自动获取焦点,默认选中最后一个
+	$('input').focus();
+	// 选中文档根元素html
+	console.log($(':root').css({background:'#ccc'}))
+
+	// console.log($('a:target'))
+	// 获取元素内容字符串是否符合,传的是text，
+	console.log($('a:contains(life)'))
+	// 获取没有子元素或文本的空元素
+	console.log($('a:empty'))
+	// 获取含有选择器所匹配的元素的元素
+	$('a:has(span)').addClass('text')
+	// 获取含有子元素或文本的元素
+	console.log($('a:parent'))
+
+
+	// 匹配不可见的元素或者表单type为hidden的元素
+	console.log($('input:hidden'))
+	console.log($('div:hidden'))
+	// 查找可见的div元素
+	console.log($('div:visible'))
+
+
+
+	// 查找含有id属性的元素
+	console.log($('div[id]'))
+	// 查找特定属性值的元素,注意引号的嵌套关系
+	console.log($('div[class = "di"]'))
+	console.log($('input[type = "text"]'))
+	// 查找不是特定属性值的元素,注意引号的嵌套关系,等价于$('input:not(type = "text")')
+	console.log($('div[class != "di"]'))
+	// console.log($('[input]:not(input = text)'))
+	
+	// 查找属性名是以某个特定属性值开始的元素
+	console.log($('div[class ^= "b"]'))
+	// 查找属性名是以某个特定属性值结束的元素
+	console.log($('div[class $= "x"]'))
+	// 查找属性名包含某个特定属性值的元素
+	console.log($('div[class *= "box"]'))
+	// 复合属性选择器，同时满足多个条件
+	console.log($('div[id][class *= "div"]'))
+
+
+	// 每个父级元素的第一个子元素，:first只返回一个
+	console.log($('ul > li:first-child'))
+	// 作为li的第一个元素
+	console.log($('li:first-of-type').addClass('hot'))
+	// 作为li的最后一个子元素
+	console.log($('li:last-of-type').addClass('lot'))
+	// 每个父级元素的第一个子元素, :last只返回一个
+	console.log($('li:last-child').addClass('lot'))
+	// 匹配父元素下的第n个子元素或奇偶元素，eq(index)匹配
+	// 选择器制定序列的元素，从0开始，nth-child作为父元素匹配子元素，从1开始
+	// console.log($('ul li:nth-child(2n+1)'))
+	// 奇数行
+	console.log($('ul li:nth-child(odd)'))
+	// 偶数行
+	console.log($('ul li:nth-child(odd)'))
+	// 寻找父元素中唯一的子元素,如果父元素中含有其他元素，那将不会被匹配。
+	console.log($('ul li:only-child'))
+	// 寻找父元素中span标签唯一的子元素
+	console.log($('div span:only-of-type'))
+
+
+	// 匹配所有的input元素,textarea,button,select都会被匹配到
+	console.log($(':input'))
+	// 匹配所有的文本框
+	console.log($(':text'))
+	// 匹配所有的密码框
+	console.log($(':password'))
+	// 匹配所有的单选按钮
+	console.log($(':radio'))
+	// 匹配所有的复选框按钮
+	console.log($(':checkbox'))
+	// 匹配所有的提交按钮
+	console.log($(':submit'))
+	// 匹配所有图像
+	console.log($(':image'))
+	// 匹配所有重置按钮
+	console.log($(':reset'))
+	// 匹配所有按钮
+	console.log($(':button'))
+	// 查找所有文件域
+	console.log($(':file'))
+	// 查找可用的input元素
+	console.log($(':enabled'))
+	// 查找不可用的input元素
+	console.log($(':disabled'))
+	// 查找被选中的复选框元素
+	console.log($(':checked'))
+	// 匹配所有选中的option元素
+	console.log($('select option:selected'))
+	// 对含有#号的ID进行编码,与CSS中CSS.escape()方法类似，但jquery支持所有浏览器
+	console.log($.escapeSelector( "#divs" ))
+	// 选中包含box类名的div
+	console.log($('div').find('.'+$.escapeSelector( ".box" )))
+	
+
+</script>
